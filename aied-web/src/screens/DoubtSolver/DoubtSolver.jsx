@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { BookOpenCheck, Globe2 } from 'lucide-react';
+import { BookOpenCheck, Globe2, MessageCircleQuestion } from 'lucide-react';
 import PageHeader from '../../components/PageHeader.jsx';
+import EmptyState from '../../components/EmptyState.jsx';
 import { useAppStore } from '../../store/useAppStore.js';
 import { SAMPLE_LECTURE } from '../../services/mock.js';
 
@@ -18,11 +19,13 @@ export default function DoubtSolver() {
     <div className="mx-auto max-w-3xl px-5 py-12">
       <PageHeader title="Your doubts" lead="Everything you've asked, grouped by lecture. Reread these before a test." />
       {groups.length === 0 ? (
-        <div className="panel p-10 text-center">
-          <p className="font-semibold">No doubts yet</p>
-          <p className="text-muted text-sm mt-1">Open a lecture and ask about anything you didn't follow.</p>
-          <Link to="/watch?sample=1" className="btn-primary mt-5">Open the sample lecture</Link>
-        </div>
+        <EmptyState
+          className="panel"
+          icon={MessageCircleQuestion}
+          title="No doubts yet"
+          description="Open a lecture and ask about anything you didn't follow."
+          action={{ label: 'Open the sample lecture', to: '/watch?sample=1' }}
+        />
       ) : groups.map(([id, msgs]) => (
         <section key={id} className="mb-10">
           <div className="flex items-baseline justify-between gap-3 mb-3">

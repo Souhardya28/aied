@@ -7,6 +7,7 @@ import { confetti } from '../../utils/confetti.js';
 import CountUp from '../../components/CountUp.jsx';
 import Ring from '../../components/Ring.jsx';
 import PageHeader from '../../components/PageHeader.jsx';
+import Modal from '../../components/Modal.jsx';
 import { demoTest } from '../../services/mock.js';
 import { api, liveMode } from '../../services/api.js';
 
@@ -42,6 +43,7 @@ export default function MockTest() {
   const [responses, setResponses] = useState([]);
   const [result, setResult] = useState(null);
   const [secs, setSecs] = useState(0);
+  const [unansweredCount, setUnansweredCount] = useState(0);
   const addTestResult = useAppStore((s) => s.addTestResult);
   const toast = useAppStore((s) => s.toast);
 
@@ -69,7 +71,15 @@ export default function MockTest() {
 
   const submit = async () => {
     const unanswered = test.questions.filter((_, i) => !responses[i]).length;
-    if (unanswered && !window.confirm(`${unanswered} question${unanswered > 1 ? 's are' : ' is'} unanswered. Submit anyway?`)) return;
+    if (unanswered > 0) {
+      setUnansweredCount(unanswered);
+      return;
+    }
+    performSubmit();
+  };
+
+  const performSubmit = async () => {
+    setUnansweredCount(0);
     setPhase('grading');
     if (test.id !== 'demo' && (await liveMode())) {
       setResult(await api(`/mocktest/${test.id}/submit`, { method: 'POST', body: { responses } }));
@@ -204,6 +214,21 @@ export default function MockTest() {
           <button onClick={() => setIdx(idx + 1)} className="btn-primary">Next question</button>
         )}
       </div>
+
+      <Modal
+        open={unansweredCount > 0}
+        onClose={() => setUnansweredCount(0)}
+        title="Unanswered Questions"
+        dangerous
+        footer={
+          <>
+            <button onClick={() => setUnansweredCount(0)} className="btn-outline">Go back</button>
+            <button onClick={performSubmit} className="btn-primary !bg-chili !text-white hover:!bg-chili/80 border-0">Submit anyway</button>
+          </>
+        }
+      >
+        You have {unansweredCount} question{unansweredCount > 1 ? 's' : ''} left blank. Are you sure you want to finish the test?
+      </Modal>
     </div>
   );
 }

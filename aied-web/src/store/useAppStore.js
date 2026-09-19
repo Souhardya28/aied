@@ -12,6 +12,7 @@ export const useAppStore = create(persist((set, get) => ({
   token: null,
   theme: 'system',     // 'light' | 'dark' | 'system'
   profile: { name: 'Samudra', class: '12', stream: 'Science (PCM)', board: 'CBSE', lang: 'as', physics: 68, maths: 58 },
+  onboarded: false,
   lecture: null,
   doubts: {},          // lectureId -> [{ role, text, grounded, sources }]
   testHistory: [],     // [{ subject, score, at }]
@@ -22,6 +23,8 @@ export const useAppStore = create(persist((set, get) => ({
   setToken: (token) => set({ token }),
   setTheme: (theme) => set({ theme }),
   setLang: (lang) => set((s) => ({ profile: { ...s.profile, lang } })),
+  setProfile: (patch) => set((s) => ({ profile: { ...s.profile, ...patch } })),
+  setOnboarded: (onboarded) => set({ onboarded }),
   setLecture: (lecture) => set({ lecture }),
   pushDoubt: (lectureId, msg) =>
     set((s) => ({ doubts: { ...s.doubts, [lectureId]: [...(s.doubts[lectureId] || []), msg] } })),
@@ -45,6 +48,6 @@ export const useAppStore = create(persist((set, get) => ({
   name: 'aied',
   storage: createJSONStorage(() => safeStorage),
   // Only durable things are saved; the lecture and toasts are session-only.
-  partialize: ({ token, theme, profile, doubts, testHistory, completed, streak }) =>
-    ({ token, theme, profile, doubts, testHistory, completed, streak }),
+  partialize: ({ token, theme, profile, onboarded, doubts, testHistory, completed, streak }) =>
+    ({ token, theme, profile, onboarded, doubts, testHistory, completed, streak }),
 }));

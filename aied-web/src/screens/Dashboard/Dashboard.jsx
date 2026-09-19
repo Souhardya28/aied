@@ -11,6 +11,7 @@ import { useAppStore } from '../../store/useAppStore.js';
 import { DEMO_DASHBOARD, DEMO_RECS, DEMO_SYLLABUS, DEMO_WEEK } from '../../services/mock.js';
 import { api, liveMode } from '../../services/api.js';
 import { useChartColors, tooltipStyle } from '../../hooks/useTheme.js';
+import ScoreCard from '../../components/ScoreCard.jsx';
 
 const STATUS = {
   done: { label: 'Done', cls: 'bg-leaf border-leaf' },
@@ -132,10 +133,8 @@ export default function Dashboard() {
           <h2 className="text-xl font-bold">Recent mock tests</h2>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {testHistory.slice(-4).reverse().map((t) => (
-              <li key={t.at} className="rounded-xl border border-line p-4">
-                <p className="text-sm text-muted">{t.subject}</p>
-                <p className={`font-display text-3xl font-extrabold ${t.score < 50 ? 'text-chili' : t.score >= 80 ? 'text-leaf' : ''}`}>{t.score}%</p>
-                <p className="text-xs text-muted">{new Date(t.at).toLocaleDateString(undefined, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</p>
+              <li key={t.at}>
+                <ScoreCard subject={t.subject} score={t.score} at={t.at} />
               </li>
             ))}
           </ul>

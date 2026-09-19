@@ -10,6 +10,7 @@ import { useLiveMode } from '../hooks/useLiveMode.js';
 import { useHotkeys } from '../hooks/useHotkeys.js';
 import { useResolvedTheme } from '../hooks/useTheme.js';
 import { useGlobalSpotlight } from '../hooks/useFx.js';
+import { useAppStore } from '../store/useAppStore.js';
 
 const isMac = typeof navigator !== 'undefined' && /Mac|iP/.test(navigator.platform);
 
@@ -17,6 +18,7 @@ export default function Shell({ children }) {
   const [palette, setPalette] = useState(false);
   const { pathname } = useLocation();
   const live = useLiveMode();
+  const profileName = useAppStore((s) => s.profile?.name) || 'S';
   useResolvedTheme();
   useGlobalSpotlight();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
@@ -53,6 +55,11 @@ export default function Shell({ children }) {
               <Search size={15} />
               <span className="hidden sm:inline-flex items-center gap-1"><kbd>{isMac ? '⌘' : 'Ctrl'}</kbd><kbd>K</kbd></span>
             </button>
+            <Link to="/settings" className="btn-outline !px-3 !py-2 text-muted hover:text-indigo" aria-label="Settings">
+              <span className="grid place-items-center h-5 w-5 rounded-full bg-indigo-soft text-indigo font-bold text-xs">
+                {profileName[0]}
+              </span>
+            </Link>
             <LanguagePicker compact />
             <ThemeToggle />
           </div>

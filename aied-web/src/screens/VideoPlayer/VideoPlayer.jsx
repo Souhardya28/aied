@@ -9,6 +9,7 @@ import { SAMPLE_LECTURE } from '../../services/mock.js';
 import { api, liveMode } from '../../services/api.js';
 import { langByCode } from '../../services/languages.js';
 import LanguagePicker from '../../components/LanguagePicker.jsx';
+import { SkeletonBlock, SkeletonCard } from '../../components/Skeleton.jsx';
 import TranscriptView from './TranscriptView.jsx';
 import LectureDoubts from '../DoubtSolver/LectureDoubts.jsx';
 import { confettiFrom } from '../../utils/confetti.js';
@@ -151,10 +152,16 @@ export default function VideoPlayer() {
 
   if (state.loading || !lecture) {
     return (
-      <div className="mx-auto max-w-6xl px-5 py-24 flex flex-col items-center text-center">
-        <Loader2 className="animate-spin text-indigo" size={28} />
-        <p className="mt-4 font-semibold">Reading the lecture</p>
-        <p className="text-muted text-sm">Pulling the transcript and translating it into {L.name}.</p>
+      <div className="mx-auto max-w-6xl px-5 py-6">
+        <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+          <div className="space-y-4">
+            <SkeletonBlock height={400} className="rounded-xl2" />
+            <SkeletonCard lines={2} className="!p-4" />
+          </div>
+          <div className="hidden lg:flex flex-col gap-4">
+            <SkeletonCard lines={5} className="flex-1" />
+          </div>
+        </div>
       </div>
     );
   }
