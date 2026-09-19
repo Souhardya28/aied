@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Theme tokens (RGB channels) ---------- */
+:root {
+  --paper: 245 246 250;  --surface: 255 255 255;  --raised: 250 250 253;
+  --ink: 26 29 58;       --oninv: 255 255 255;    --muted: 106 111 140;
+  --line: 227 229 238;   --stage: 22 24 48;       --shadow: 26 29 58;
+  --indigo: 67 56 202;   --indigo-soft: 236 235 251;
+  --marigold: 244 182 63; --marigold-soft: 253 241 214;
+  --leaf: 47 125 91;     --chili: 194 65 58;
+  --hl: 244 182 63;      --hl-alpha: 1;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --paper: 14 15 28;     --surface: 22 24 42;     --raised: 29 31 53;
+  --ink: 234 235 245;    --oninv: 14 15 28;       --muted: 150 154 184;
+  --line: 44 47 74;      --stage: 8 9 20;         --shadow: 0 0 0;
+  --indigo: 160 153 255; --indigo-soft: 38 36 82;
+  --marigold: 246 192 88; --marigold-soft: 58 48 26;
+  --leaf: 94 196 146;    --chili: 240 116 106;
+  --hl: 246 192 88;      --hl-alpha: .38;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body { @apply bg-paper text-ink font-sans; transition: background-color .25s ease, color .25s ease; }
+  h1, h2, h3 { @apply font-display tracking-tight; }
+  :focus-visible { @apply outline-none ring-2 ring-indigo ring-offset-2 ring-offset-paper; }
+  ::selection { background: rgb(var(--marigold) / .35); }
+  kbd { @apply inline-grid place-items-center min-w-[1.4rem] h-6 px-1.5 rounded-md border border-line bg-raised text-[11px] font-semibold text-muted; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-ink text-oninv hover:bg-brand hover:text-white; }
+  .btn-ghost { @apply btn text-ink hover:bg-indigo-soft; }
+  .btn-outline { @apply btn border border-line bg-surface hover:border-ink; }
+  .panel { @apply relative rounded-xl2 bg-surface border border-line shadow-soft; }
+  .field { @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-[15px] placeholder:text-muted/70 focus:border-indigo focus:outline-none focus:ring-4 focus:ring-indigo/15; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium; }
+  .seg { @apply inline-flex rounded-full border border-line bg-surface p-1; }
+  .seg > button { @apply rounded-full px-3.5 py-1.5 text-sm font-semibold text-muted transition-colors; }
+  .seg > button[aria-pressed="true"], .seg > button[aria-checked="true"] { @apply bg-ink text-oninv; }
+  /* Highlighter-pen stroke for the active transcript line */
+  .highlight {
+    background-image: linear-gradient(transparent 55%, rgb(var(--hl) / var(--hl-alpha)) 55%, rgb(var(--hl) / var(--hl-alpha)) 92%, transparent 92%);
+    background-repeat: no-repeat;
+    @apply animate-sweep;
+  }
+  .dotgrid { background-image: radial-gradient(rgb(var(--line)) 1px, transparent 1px); background-size: 22px 22px; }
+}
+
+@media print {
+  header, footer, nav, .no-print { display: none !important; }
+  .panel { box-shadow: none; break-inside: avoid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .highlight { background-size: 100% 100%; }
+}
+
+/* ================= "Wow" layer — every effect below is off under reduced motion ================= */
+
+/* Cursor spotlight: a soft glow that follows the pointer inside a card and lights its border */
+.spot { position: relative; isolation: isolate; }
+.panel { isolation: isolate; }
+.spot::before, .panel::before {
+  content: ''; position: absolute; inset: -1px; border-radius: inherit; z-index: -1; pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--indigo) / .55), transparent 40%);
+  opacity: 0; transition: opacity .3s ease;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask-composite: exclude; padding: 1px;
+}
+.spot::after, .panel::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1; pointer-events: none;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--indigo) / .07), transparent 45%);
+  opacity: 0; transition: opacity .3s ease;
+}
+.spot:hover::before, .spot:hover::after, .panel:hover::before, .panel:hover::after { opacity: 1; }
+.no-spot::before, .no-spot::after { display: none; }
+
+/* Hero aurora that trails the cursor */
+.aurora {
+  background:
+    radial-gradient(600px circle at var(--hx, 70%) var(--hy, 30%), rgb(var(--indigo) / .16), transparent 60%),
+    radial-gradient(420px circle at calc(var(--hx, 70%) - 18%) calc(var(--hy, 30%) + 22%), rgb(var(--marigold) / .14), transparent 60%);
+  transition: background .2s linear;
+}
+
+/* Headline words blur in one after another */
+.word-in { display: inline-block; opacity: 0; filter: blur(10px); transform: translateY(14px); animation: wordIn .7s cubic-bezier(.2,.7,.2,1) forwards; }
+@keyframes wordIn { to { opacity: 1; filter: blur(0); transform: none; } }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* Timeline line that draws itself */
+.draw-line { transform-origin: left; transform: scaleX(0); transition: transform 1.4s cubic-bezier(.2,.7,.2,1) .2s; }
+.is-in .draw-line { transform: scaleX(1); }
+
+/* Karaoke highlighter: width follows playback progress inside the line */
+.karaoke {
+  background-image: linear-gradient(transparent 55%, rgb(var(--hl) / var(--hl-alpha)) 55%, rgb(var(--hl) / var(--hl-alpha)) 92%, transparent 92%);
+  background-repeat: no-repeat; background-size: var(--p, 0%) 100%;
+  transition: background-size .25s linear;
+}
+
+/* Pulse used when a doubt's "Jump to" lands on a line */
+@keyframes ping-line { 0% { box-shadow: 0 0 0 0 rgb(var(--indigo) / .45); } 100% { box-shadow: 0 0 0 14px rgb(var(--indigo) / 0); } }
+.ping { animation: ping-line .9s ease-out 2; }
+
+/* Narration equaliser */
+.eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.eq i { width: 3px; border-radius: 2px; background: currentColor; animation: eq 0.9s ease-in-out infinite; }
+.eq i:nth-child(2) { animation-delay: -.3s; } .eq i:nth-child(3) { animation-delay: -.6s; } .eq i:nth-child(4) { animation-delay: -.15s; }
+@keyframes eq { 0%, 100% { height: 25%; } 50% { height: 100%; } }
+
+/* Shimmering text for "thinking" states */
+.shimmer {
+  background: linear-gradient(90deg, rgb(var(--muted)) 0%, rgb(var(--ink)) 50%, rgb(var(--muted)) 100%);
+  background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+/* Theme switch: circular reveal via the View Transitions API */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
+/* Gradient ring behind the primary CTA on hover */
+.glow-btn { position: relative; }
+.glow-btn::after {
+  content: ''; position: absolute; inset: -3px; border-radius: 9999px; z-index: -1; opacity: 0; filter: blur(10px);
+  background: conic-gradient(from var(--a, 0deg), #4338CA, #F4B63F, #2F7D5B, #4338CA);
+  transition: opacity .3s ease; animation: spin 4s linear infinite;
+}
+.glow-btn:hover::after, .glow-btn:focus-visible::after { opacity: .75; }
+@property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@keyframes spin { to { --a: 360deg; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .word-in, .reveal { opacity: 1 !important; filter: none !important; transform: none !important; }
+  .draw-line { transform: none !important; }
+  .aurora { transition: none; }
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes flicker { 0%,100% { transform: scale(1) rotate(-2deg); } 50% { transform: scale(1.08) rotate(3deg); } }
+@keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(60px,30px) scale(1.15); } }
+@keyframes wave { to { transform: translateX(-200px); } }

@@ -1,0 +1,15 @@
+import Constants from 'expo-constants';
+import { useAppStore } from '../store/useAppStore';
+
+const BASE = Constants.expoConfig?.extra?.apiUrl;
+export async function api(path, { method = 'GET', body } = {}) {
+  const token = useAppStore.getState().token;
+  const res = await fetch(`${BASE}/api${path}`, {
+    method,
+    headers: { 'Content-Type': 'application/json', ...(token && { Authorization: `Bearer ${token}` }) },
+    body: body && JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error);
+  return data;
+}

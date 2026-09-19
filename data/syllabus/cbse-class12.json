@@ -1,0 +1,198 @@
+[
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Electrostatics",
+  "topic": "Coulomb's law"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Electrostatics",
+  "topic": "Electric field lines"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Electrostatics",
+  "topic": "Gauss's law"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Kirchhoff's rules"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's law"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Ray Optics",
+  "topic": "Refraction at spherical surfaces"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Ray Optics",
+  "topic": "Lens maker's formula"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Physics",
+  "chapter": "Ray Optics",
+  "topic": "Total internal reflection"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Colligative properties"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate law"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Mathematics",
+  "chapter": "Matrices",
+  "topic": "Matrix operations"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Mathematics",
+  "chapter": "Matrices",
+  "topic": "Inverse by elementary operations"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Mathematics",
+  "chapter": "Integrals",
+  "topic": "Integration by parts"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Mathematics",
+  "chapter": "Integrals",
+  "topic": "Definite integrals"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Biology",
+  "chapter": "Genetics",
+  "topic": "Mendel's laws"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Biology",
+  "chapter": "Genetics",
+  "topic": "Chromosomal theory"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Biology",
+  "chapter": "Human Reproduction",
+  "topic": "Gametogenesis"
+ },
+ {
+  "board": "CBSE",
+  "class": "12",
+  "subject": "Biology",
+  "chapter": "Human Reproduction",
+  "topic": "Menstrual cycle"
+ }
+]

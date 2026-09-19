@@ -1,0 +1,127 @@
+[
+ {
+  "path": "Engineering (B.Tech)",
+  "streams": [
+   "Science-PCM"
+  ],
+  "exams": [
+   "JEE Main",
+   "JEE Advanced",
+   "State CETs"
+  ],
+  "colleges": [
+   "IITs",
+   "NITs",
+   "IIIT Guwahati",
+   "Assam Engineering College"
+  ],
+  "skills": [
+   "Mathematics",
+   "Physics",
+   "Programming"
+  ],
+  "summary": "Four-year degree; JEE Main in Jan/Apr of class 12."
+ },
+ {
+  "path": "Medicine (MBBS)",
+  "streams": [
+   "Science-PCB"
+  ],
+  "exams": [
+   "NEET-UG"
+  ],
+  "colleges": [
+   "AIIMS",
+   "Gauhati Medical College",
+   "State medical colleges"
+  ],
+  "skills": [
+   "Biology",
+   "Chemistry"
+  ],
+  "summary": "5.5 years including internship; NEET in May."
+ },
+ {
+  "path": "Data Science",
+  "streams": [
+   "Science-PCM",
+   "Commerce with Maths"
+  ],
+  "exams": [
+   "JEE Main",
+   "CUET",
+   "IAT (IISER)"
+  ],
+  "colleges": [
+   "IITs",
+   "ISI Kolkata",
+   "CMI"
+  ],
+  "skills": [
+   "Statistics",
+   "Python",
+   "Linear algebra"
+  ],
+  "summary": "Via B.Tech CS, B.Stat or B.Sc Maths/Statistics."
+ },
+ {
+  "path": "Chartered Accountancy",
+  "streams": [
+   "Commerce"
+  ],
+  "exams": [
+   "CA Foundation"
+  ],
+  "colleges": [
+   "ICAI"
+  ],
+  "skills": [
+   "Accounting",
+   "Law",
+   "Economics"
+  ],
+  "summary": "Register after class 12; three levels."
+ },
+ {
+  "path": "Civil Services",
+  "streams": [
+   "Any"
+  ],
+  "exams": [
+   "UPSC CSE",
+   "APSC CCE"
+  ],
+  "colleges": [
+   "Any graduate degree"
+  ],
+  "skills": [
+   "General studies",
+   "Writing"
+  ],
+  "summary": "Graduate first; exam from age 21."
+ },
+ {
+  "path": "Pure Sciences / Research",
+  "streams": [
+   "Science-PCM",
+   "Science-PCB"
+  ],
+  "exams": [
+   "IAT (IISER)",
+   "NEST",
+   "CUET"
+  ],
+  "colleges": [
+   "IISERs",
+   "NISER",
+   "IISc",
+   "Tezpur University"
+  ],
+  "skills": [
+   "Curiosity",
+   "Mathematics",
+   "Lab work"
+  ],
+  "summary": "BS-MS dual degree leads into research careers."
+ }
+]

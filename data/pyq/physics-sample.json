@@ -1,0 +1,54 @@
+[
+ {
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "weightage": 22,
+  "frequency": 14,
+  "years": [
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ]
+ },
+ {
+  "subject": "Physics",
+  "chapter": "Ray Optics",
+  "weightage": 18,
+  "frequency": 12,
+  "years": [
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ]
+ },
+ {
+  "subject": "Physics",
+  "chapter": "Electrostatics",
+  "weightage": 16,
+  "frequency": 11,
+  "years": [
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ]
+ },
+ {
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "weightage": 14,
+  "frequency": 9,
+  "years": [
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ]
+ }
+]

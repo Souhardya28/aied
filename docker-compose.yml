@@ -1,0 +1,30 @@
+services:
+  mongo:
+    image: mongo:7
+    ports: ["27017:27017"]
+    volumes: [mongo-data:/data/db]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  api:
+    build: ./aied-backend
+    env_file: ./aied-backend/.env
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/aied
+      REDIS_URL: redis://redis:6379
+    ports: ["5000:5000"]
+    depends_on: [mongo, redis]
+
+  worker:
+    build: ./aied-backend
+    command: node workers/index.js
+    env_file: ./aied-backend/.env
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/aied
+      REDIS_URL: redis://redis:6379
+    depends_on: [mongo, redis]
+
+volumes:
+  mongo-data:

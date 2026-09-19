@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+aied-web/dist/
+aied-app/dist/
+aied-app/.expo/
+
+# Environment files (never commit secrets)
+.env
+aied-backend/.env
+aied-web/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
