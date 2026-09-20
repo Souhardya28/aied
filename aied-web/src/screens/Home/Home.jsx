@@ -32,6 +32,8 @@ const PREVIEW_LANGS = ['as', 'bn', 'hi'];
 function LivePreview() {
   const [line, setLine] = useState(0);
   const [li, setLi] = useState(0);
+  const globalLang = useAppStore((s) => s.profile.lang);
+  
   useEffect(() => {
     const id = setInterval(() => {
       setLine((n) => {
@@ -41,7 +43,9 @@ function LivePreview() {
     }, 1900);
     return () => clearInterval(id);
   }, []);
-  const code = PREVIEW_LANGS[li];
+  
+  // Use global language if it's one of the preview ones, otherwise cycle
+  const code = PREVIEW_LANGS.includes(globalLang) ? globalLang : PREVIEW_LANGS[li];
   const segs = SAMPLE_LECTURE.translations[code].slice(3, 7);
   const L = langByCode(code);
 
@@ -66,7 +70,7 @@ function LivePreview() {
         ))}
       </ul>
       <div className="border-t border-line px-4 py-3 flex items-center gap-2 text-sm">
-        <span className="chip bg-leaf/10 text-leaf"><BookOpenCheck size={13} /> From this lecture</span>
+        <span className="chip bg-leaf/10 text-leaf"><BookOpenCheck size={13} /> {L.fromLecture}</span>
         <span className="text-muted truncate">“Why the minus sign?” → Lenz's law, 1:01</span>
       </div>
     </div>

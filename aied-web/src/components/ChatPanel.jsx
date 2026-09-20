@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Mic, MicOff, SendHorizontal, BookOpenCheck, Globe2, Copy, Check } from 'lucide-react';
 import { useVoiceInput } from '../hooks/useSpeech.js';
+import { LANGUAGES } from '../services/languages.js';
 
 const fmt = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 
@@ -19,6 +20,7 @@ export default function ChatPanel({ messages, onSend, busy, placeholder, speechL
   const [text, setText] = useState('');
   const endRef = useRef(null);
   const voice = useVoiceInput(speechLang, (t) => setText((p) => (p ? `${p} ${t}` : t)));
+  const langObj = LANGUAGES.find((l) => l.speech === speechLang) || LANGUAGES.find((l) => l.code === 'en');
 
   useEffect(() => { endRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }, [messages]);
 
@@ -52,7 +54,7 @@ export default function ChatPanel({ messages, onSend, busy, placeholder, speechL
                 {m.grounded !== undefined && (
                   <span className={`chip mb-2 ${m.grounded ? 'bg-leaf/10 text-leaf' : 'bg-marigold-soft text-ink'}`}>
                     {m.grounded ? <BookOpenCheck size={13} /> : <Globe2 size={13} />}
-                    {m.grounded ? 'From this lecture' : 'General knowledge — not in this lecture'}
+                    {m.grounded ? langObj.fromLecture : langObj.genKnowledge}
                   </span>
                 )}
                 <p className="whitespace-pre-wrap text-[15px] leading-relaxed">{m.text || <span className="shimmer font-medium">Searching the lecture…</span>}</p>
